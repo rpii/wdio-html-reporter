@@ -65,7 +65,7 @@ body {
 .table {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 20px
+    margin-bottom: 10px
 }
 
 th {
@@ -467,6 +467,11 @@ tr.test-row {
     background-color: #ecda8c;
     cursor: pointer;
     /*color:white;*/
+}
+
+.filter-panel{
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 .filterOff{

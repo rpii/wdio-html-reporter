@@ -190,10 +190,45 @@ class HtmlGenerator {
                 try
                 {
                     let html = nunjucks.render("report.html", reportData);
+                    fs.outputFileSync(reportData.reportFile, html);
+
+                    let sortedSuites = reportData.suites.sort((suite1, suite2) => {
+                        let first = dayjs.utc(suite1.start);
+                        let second = dayjs.utc(suite2.start);
+                        if (first.isAfter(second)) {
+                            return 1;
+                        }
+                        else if (first.isBefore(second)) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+
+                    for (let i = 0; i < sortedSuites.length; i++) {
+                        let suite = sortedSuites[i];
+                        
+                        try {
+                            const suiteHtml = await new Promise((resolve, reject) => {
+                                nunjucks.render("suite.html", { suite }, (err, result) => {
+                                    if (err) {
+                                        HtmlGenerator.LOG.error('Error rendering template:', err);
+                                        reject(err);
+                                    } else {
+                                        resolve(result);
+                                    }
+                                });
+                            });
+                    
+                            await fs.appendFile(reportData.reportFile, suiteHtml);
+                            HtmlGenerator.LOG.info(`Appended suite: ${suite.title}`);
+                        } catch (error) {
+                            HtmlGenerator.LOG.error('Error processing suite:', error);
+                        }
+                    }
 
                     if (fs.pathExistsSync(reportOptions.outputDir))
                     {
-                        fs.outputFileSync(reportData.reportFile, html);
+                        
 
                         const reportCss = rootdirname + '/css/report-styles.css';
                         const destCss = reportOptions.outputDir + '/report-styles.css';
