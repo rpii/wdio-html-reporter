@@ -1,4 +1,10 @@
-# Changelog: 
+# Changelog:
+
+    8.1.7:
+        Removed javascript files
+        Moved suite rendering to typescript from nunjucks template to avoid memory error from longer test runs
+        Removed json.stringify from console.info to avoid memory error
+        Updated styles on reports with new template
     8.0.6:
         Protect against missing video file if nunjucks html generation
     8.0.5:
@@ -28,7 +34,7 @@
                     See sample/wdio.config.ts for configuration. 
                     Requires updated or patched wdio-video-reporter
                     (https://github.com/rpii/wdio-video-reporter)
-
+    
     7.9.0:
         Bugfix: [Address duplicate tests and suites being displayed when using nested suites #74] 
         (https://github.com/rpii/wdio-html-reporter/issues/74)
@@ -36,15 +42,15 @@
     7.8.7:
         Bugfix: [Address issues caused by JSON.stringify running out of string memory.  Now saves screenshots as links to drastically reduce menory usage #71])(https://github.com/rpii/wdio-html-reporter/pull/71)
         set reporterOption linkScreenshots:true
-
+    
     7.8.5:
         Bugfix: [Fixes empty Assertion block due to AssertionError #71])(https://github.com/rpii/wdio-html-reporter/pull/71)
-
+    
     7.8.4:
         Feature: [add logic to show/hide failed/passed tests #69])(https://github.com/rpii/wdio-html-reporter/pull/69)
     7.8.3:
         Bugfix: [Fix logic for 'expandable-control' elements 'click' event #6])(https://github.com/rpii/wdio-html-reporter/pull/68)
-
+    
     7.8.1:
         Cleanup: update dependencies, remove cucumber warning 
         Add note on how to resolve the multiple types ts error
@@ -60,9 +66,9 @@
         Bugfix: remove @wdio/types  
     7.7.14:
         Bugfix: catch json write error  
-
+    
      7.7.13:
-
+    
         Bugfix: update to webdriverio 7.7.6, fix compile fail  
     
         Bugfix: webdriverio 7.7.4 event structure was changed, update to match. caused assertion display to fail  
