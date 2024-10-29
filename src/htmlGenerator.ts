@@ -3,8 +3,7 @@ import nunjucks from "nunjucks";
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration.js';
 import {SuiteStats, TestStats} from "@wdio/reporter";
-import json from 'big-json';
-import {String} from 'typescript-string-operations';
+import util from 'util';
 import fs from 'fs-extra';
 import _ from 'lodash';
 import path from 'node:path';
@@ -228,15 +227,15 @@ class HtmlGenerator {
 
                     if (fs.pathExistsSync(reportOptions.outputDir))
                     {
-                        
+                        const copyFile = util.promisify(fs.copyFile);
 
                         const reportCss = rootdirname + '/css/report-styles.css';
                         const destCss = reportOptions.outputDir + '/report-styles.css';
-                        fs.copyFile(reportCss, destCss);
+                        await copyFile(reportCss, destCss);
 
                         const cssFont = rootdirname + '/css/glyphicons-halflings-regular.woff';
                         const fontDest = reportOptions.outputDir + '/glyphicons-halflings-regular.woff';
-                        fs.copyFile(cssFont, fontDest);
+                        await copyFile(cssFont, fontDest);
                     }
                 } catch (error) {
                    HtmlGenerator.LOG.error("Html Generation failed: " + error);
