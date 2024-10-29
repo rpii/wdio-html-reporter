@@ -1,4 +1,0 @@
-import fs from 'fs-extra';
-export default async function copyFiles(srcDir, destDir) {
-    return await fs.copy(srcDir, destDir);
-}

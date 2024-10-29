@@ -61,55 +61,15 @@
         </tr>
         </tbody>
     </table>
-
-    <table class="table table-bordered">
-        <tr>
-            <td>
-                <span class="filter toggleFailingSuites"><span>Hide</span> Failing Suites</span>
-                <span class="filter togglePassingSuites"><span>Hide</span> Passing Suites</span>
-                <span class="filter toggleFailingTests"><span>Hide</span> Failing Tests</span>
-                <span class="filter togglePassingTests"><span>Hide</span> Passing Tests</span>
-            </td>
-        </tr>
-    </table>
+    
+    <div class="filter-panel">
+        <span class="filter toggleFailingSuites"><span>Hide</span> Failing Suites</span>
+        <span class="filter togglePassingSuites"><span>Hide</span> Passing Suites</span>
+        <span class="filter toggleFailingTests"><span>Hide</span> Failing Tests</span>
+        <span class="filter togglePassingTests"><span>Hide</span> Passing Tests</span>
+    </div>
+                
     <h2>Results</h2>
-    <table>
-        <tr>
-        <td>
-        <table class="table table-bordered">
-            <tr>
-                <td colspan="2">
-                {% if suites and suites.length > 0 %}
-                    <h3>{{info.cid}}</h3>
-                {% else %}
-                    <h3 class="warning">{{info.cid}}</h3>
-                {% endif %}
-                <table class="table table-bordered">
-                    {% if specs %}
-                        {% for spec in specs %}
-                        <tr>
-                            <td>Spec File</td>
-                            <td>{{spec}}</td>
-                        </tr>
-                        {% endfor %}
-                    {% else %}
-                        {% for spec in info.specs %}
-                            <tr>
-                                <td>Spec File</td>
-                                <td>{{spec}}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endif %}
-                    {% if suites %}
-                        {% for suite in suites %}
-                            {{ renderSuite(suite) }}
-                        {% endfor %}
-                    {% endif %}
-                </table>
-                </td>
-            </tr>
-        </table>
-    </table>
 </div>
 
 <script>
